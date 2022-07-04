@@ -15,8 +15,8 @@ public class NormalBehavior implements ItemStateBehavior {
 	 */
 	@Override
 	public void maintainState() {
-		this.item.sellIn -= 1;
 		this.item.quality -= 1;
+		this.item.sellIn -= 1;
 		
         if (item.sellIn < 0) {
         	item.quality -= 1;
