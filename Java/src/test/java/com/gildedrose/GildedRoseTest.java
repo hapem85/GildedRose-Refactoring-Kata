@@ -18,6 +18,8 @@ public class GildedRoseTest {
 
 		app.updateQuality();
 
+		assertEquals(-1, app.items[0].sellIn);
+		assertEquals(0, app.items[0].quality);
 		assertEquals("foo", app.items[0].name);
 	}
 
@@ -27,6 +29,7 @@ public class GildedRoseTest {
 
 		app.updateQuality();
 
+		assertEquals(NORMAL_ITEM, itemNameValue(app));
 		assertEquals(9, itemSellByDayValue(app));
 		assertEquals(19, itemQualityValue(app));
 	}
@@ -37,6 +40,8 @@ public class GildedRoseTest {
 
 		app.updateQuality();
 
+		assertEquals(NORMAL_ITEM, itemNameValue(app));
+		assertEquals(1, itemSellByDayValue(app));
 		assertEquals(0, itemQualityValue(app));
 	}
 
@@ -46,6 +51,8 @@ public class GildedRoseTest {
 
 		app.updateQuality();
 
+		assertEquals(NORMAL_ITEM, itemNameValue(app));
+		assertEquals(-1, itemSellByDayValue(app));
 		assertEquals(3, itemQualityValue(app));
 	}
 
@@ -55,6 +62,8 @@ public class GildedRoseTest {
 
 		app.updateQuality();
 
+		assertEquals(NORMAL_ITEM, itemNameValue(app));
+		assertEquals(-1, itemSellByDayValue(app));
 		assertEquals(0, itemQualityValue(app));
 	}
 
@@ -63,8 +72,10 @@ public class GildedRoseTest {
 		GildedRose app = this.createGildedRoseItem(AGED_BRIE_ITEM, 0, 0);
 
 		app.updateQuality();
-
+		
+		assertEquals(AGED_BRIE_ITEM, itemNameValue(app));
 		assertEquals(-1, itemSellByDayValue(app));
+		assertEquals(1, itemQualityValue(app));
 	}
 
 
@@ -74,6 +85,7 @@ public class GildedRoseTest {
 
 		app.updateQuality();
 
+		assertEquals(AGED_BRIE_ITEM, itemNameValue(app));
 		assertEquals(1, itemSellByDayValue(app));
 		assertEquals(1, itemQualityValue(app));
 	}
@@ -84,6 +96,8 @@ public class GildedRoseTest {
 		
 		app.updateQuality();
 
+		assertEquals(AGED_BRIE_ITEM, itemNameValue(app));
+		assertEquals(0, itemSellByDayValue(app));
 		assertEquals(50, itemQualityValue(app));
 	}
 	
@@ -93,6 +107,8 @@ public class GildedRoseTest {
 
 		app.updateQuality();
 
+		assertEquals(AGED_BRIE_ITEM, itemNameValue(app));
+		assertEquals(-2, itemSellByDayValue(app));
 		assertEquals(50, itemQualityValue(app));
 	}
 	
@@ -100,6 +116,7 @@ public class GildedRoseTest {
 	public void sulfurasItemQualityIsEighty() {
 		GildedRose app = this.createGildedRoseItem(SULFURAS_ITEM, 1, 80);
 
+		assertEquals(SULFURAS_ITEM, itemNameValue(app));
 		assertEquals(1, itemSellByDayValue(app));
 		assertEquals(80, itemQualityValue(app));
 	}
@@ -110,6 +127,7 @@ public class GildedRoseTest {
 
 		app.updateQuality();
 
+		assertEquals(SULFURAS_ITEM, itemNameValue(app));
 		assertEquals(0, itemSellByDayValue(app));
 		assertEquals(80, itemQualityValue(app));
 	}
@@ -120,6 +138,7 @@ public class GildedRoseTest {
 
 		app.updateQuality();
 
+		assertEquals(SULFURAS_ITEM, itemNameValue(app));
 		assertEquals(-1, itemSellByDayValue(app));
 		assertEquals(80, itemQualityValue(app));
 	}
@@ -130,7 +149,9 @@ public class GildedRoseTest {
 
 		app.updateQuality();
 
+		assertEquals(BACKSTAGE_PASSES_ITEM, itemNameValue(app));
 		assertEquals(-1, itemSellByDayValue(app));
+		assertEquals(0, itemQualityValue(app));
 	}
 
 	@Test
@@ -298,6 +319,10 @@ public class GildedRoseTest {
 	private GildedRose createGildedRoseItem(String itemName, int itemSellIn, int itemQuality) {
 		Item[] items = new Item[] { new Item(itemName, itemSellIn, itemQuality) };
 		return new GildedRose(items);
+	}
+	
+	private String itemNameValue(GildedRose app) {
+		return app.items[0].name;
 	}
 
 	private int itemSellByDayValue(GildedRose app) {
