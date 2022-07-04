@@ -7,8 +7,13 @@ public class AgedBrieBehavior implements ItemStateBehavior {
 		this.item = item;
 	}
 	
+	/**
+	 * Aged Brie increases in Quality the older it gets
+	 * The Quality of an item is never more than 50
+	 */
 	@Override
 	public void maintainState() {
-		//TODO implement the behaviors of this item
+		this.item.sellIn -= 1;
+		this.item.quality += this.item.quality < 50 ? 1 : 0;
 	}
 }
