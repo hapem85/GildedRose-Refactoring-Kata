@@ -1,74 +1,26 @@
 package com.gildedrose;
 
+import java.util.Objects;
+
 class GildedRose {
     Item[] items;
 
     public GildedRose(Item[] items) {
         this.items = items;
     }
-
-    public void updateQuality() {
-        for (Item item: items) {
-            if (!item.name.equals("Aged Brie") && !item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (item.quality > 0) {
-                    if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                        item.quality = item.quality - 1;
-                    }
-                }
-            } else {
-                if (this.isQualityLessThanFifty(item)) {
-                    this.increaseQualityByOne(item);
-
-                    if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (item.sellIn < 11) {
-                            if (this.isQualityLessThanFifty(item)) {
-                                this.increaseQualityByOne(item);
-                            }
-                        }
-
-                        if (item.sellIn < 6) {
-                            if (this.isQualityLessThanFifty(item)) {
-                                this.increaseQualityByOne(item);
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                item.sellIn = item.sellIn - 1;
-            }
-
-            if (item.sellIn < 0) {
-                if (!item.name.equals("Aged Brie")) {
-                    if (!item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (item.quality > 0) {
-                            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                                item.quality = item.quality - 1;
-                            }
-                        }
-                    } else {
-                        item.quality = item.quality - item.quality;
-                    }
-                } else {
-                    if (this.isQualityLessThanFifty(item)) {
-                        this.increaseQualityByOne(item);
-                    }
-                }
-            }
-        }
-    }
     
-	private void increaseQualityByOne(Item item) {
-		item.quality += 1;
-	}
-
-	private boolean isQualityLessThanFifty(Item item) {
-		return item.quality < 50;
-	}
+    public void updateQuality() {
+    	for (Item item: items) {
+    		ItemStateBehavior itemBehavior = this.getItemBehaviorFactory(item);
+    		if(Objects.isNull(itemBehavior)) {
+    			return;
+    		}
+    		itemBehavior.maintainState();
+    	}
+    }
 	
-	private ItemBehaviorFactory getItemBehaviorFactory(Item item) {
-		return new ItemBehaviorFactory(item);
+	private ItemStateBehavior getItemBehaviorFactory(Item item) {
+		return new ItemBehaviorFactory(item).getItemBehavior(item);
 	}
 	
 }
