@@ -9,7 +9,25 @@ public class BackstagePassesBehavior implements ItemStateBehavior {
 	
 	@Override
 	public void maintainState() {
-		//TODO implement the behaviors of this item
+		this.item.quality += this.getNumberOfQualityToUpdate();
+		
+		if (this.item.sellIn < 11) {
+			this.item.quality += this.getNumberOfQualityToUpdate();
+        }
+
+        if (this.item.sellIn < 6) {
+        	this.item.quality += this.getNumberOfQualityToUpdate();
+        }
+        
+        this.item.sellIn -= 1;
+        
+        if(this.item.sellIn < 0) {
+        	this.item.quality = 0;
+        }
+	}
+
+	private int getNumberOfQualityToUpdate() {
+		return this.item.quality < 50 ? 1 : 0;
 	}
 	
 }
