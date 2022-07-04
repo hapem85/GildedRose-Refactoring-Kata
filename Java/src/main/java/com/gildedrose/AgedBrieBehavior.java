@@ -13,7 +13,7 @@ public class AgedBrieBehavior implements ItemStateBehavior {
 	 */
 	@Override
 	public void maintainState() {
-		this.item.sellIn -= 1;
 		this.item.quality += this.item.quality < 50 ? 1 : 0;
+		this.item.sellIn -= 1;
 	}
 }
