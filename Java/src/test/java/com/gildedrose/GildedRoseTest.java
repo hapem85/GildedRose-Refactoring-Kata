@@ -298,14 +298,14 @@ public class GildedRoseTest {
 		assertEquals(18, itemQualityValue(app));
 	}
 
-//	@Test
-//	public void conjuredItemDegradesQualityTwice() {
-//		GildedRose app = this.createGildedRoseItem(CONJURED_ITEM, 3, 6);
-//
-//		app.updateQuality();
-//
-//		assertEquals(4, itemQualityValue(app));
-//	}
+	@Test
+	public void conjuredItemDegradesQualityTwice() {
+		GildedRose app = this.createGildedRoseItem(CONJURED_ITEM, 3, 6);
+
+		app.updateQuality();
+
+		assertEquals(4, itemQualityValue(app));
+	}
 
 	@Test
 	public void conjuredItemQualityMinimumIsZero() {
