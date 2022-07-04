@@ -1,40 +1,45 @@
 package com.gildedrose;
 
-public class BackstagePassesBehavior implements ItemStateBehavior {
-	private Item item;
+/**
+ * Backstage passes increases in Quality the older it gets
+ * Quality increases by 2 when there are 10 days or less
+ * by 3 when there are 5 days or less
+ * Quality drops to 0 after the concert
+ * The Quality of an item is never more than 50
+ */
+public class BackstagePassesBehavior extends ItemStateBehavior {
 	
 	public BackstagePassesBehavior(Item item) {
-		this.item = item;
+		super(item);
 	}
 	
-	/**
-	 * Backstage passes increases in Quality the older it gets
-	 * Quality increases by 2 when there are 10 days or less
-	 * by 3 when there are 5 days or less
-	 * Quality drops to 0 after the concert
-	 * The Quality of an item is never more than 50
-	 */
 	@Override
-	public void maintainState() {
-		this.item.quality += this.getNumberOfQualityToUpdate();
+	int changedItemSellIn() {
+		return this.item.sellIn - 1;
+	}
+
+	@Override
+	int changedItemQuality() {
+		int quality = this.item.quality; 
+		quality += this.getUpdatedQualityNumber(quality);
 		
 		if (this.item.sellIn < 11) {
-			this.item.quality += this.getNumberOfQualityToUpdate();
+			quality += this.getUpdatedQualityNumber(quality);
         }
 
         if (this.item.sellIn < 6) {
-        	this.item.quality += this.getNumberOfQualityToUpdate();
+        	quality += this.getUpdatedQualityNumber(quality);
         }
-        
-        this.item.sellIn -= 1;
-        
-        if(this.item.sellIn < 0) {
-        	this.item.quality = 0;
-        }
+        return quality;
 	}
 
-	private int getNumberOfQualityToUpdate() {
-		return this.item.quality < 50 ? 1 : 0;
+	@Override
+	int changedItemQualityIfSellInLessThanZero() {
+		return 0;
+	}
+	
+	private int getUpdatedQualityNumber(int quality) {
+		return quality < 50 ? 1 : 0;
 	}
 	
 }

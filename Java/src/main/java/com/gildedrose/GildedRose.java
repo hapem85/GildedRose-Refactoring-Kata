@@ -15,7 +15,7 @@ class GildedRose {
     		if(Objects.isNull(itemBehavior)) {
     			return;
     		}
-    		itemBehavior.maintainState();
+    		itemBehavior.changeState();
     	}
     }
 	

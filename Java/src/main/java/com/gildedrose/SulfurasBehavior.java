@@ -1,12 +1,29 @@
 package com.gildedrose;
 
-public class SulfurasBehavior implements ItemStateBehavior {
-	public SulfurasBehavior() {}
+/**
+ * Never change values for this item.
+ */
+public class SulfurasBehavior extends ItemStateBehavior {
+	public SulfurasBehavior(Item item) {
+		super(item);
+	}
 	
-	/**
-	 * Never alters for this item.
-	 */
 	@Override
-	public void maintainState() {}
+	int changedItemSellIn() {
+		return this.item.sellIn;
+	}
 
+	@Override
+	int changedItemQuality() {
+		return getUpdatedQuality();
+	}
+
+	@Override
+	int changedItemQualityIfSellInLessThanZero() {
+		return getUpdatedQuality();
+	}
+
+	private int getUpdatedQuality() {
+		return this.item.quality > 80 ? 80 : this.item.quality;
+	}
 }

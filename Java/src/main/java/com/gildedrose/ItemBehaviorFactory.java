@@ -12,14 +12,14 @@ public class ItemBehaviorFactory {
     public static final String CONJURED_ITEM = "Conjured Mana Cake";
 	
 	public ItemBehaviorFactory(Item item) {
-		ITEM_TYPES.put(SULFURAS_ITEM, new SulfurasBehavior());
+		ITEM_TYPES.put(SULFURAS_ITEM, new SulfurasBehavior(item));
 		ITEM_TYPES.put(AGED_BRIE_ITEM, new AgedBrieBehavior(item));
 		ITEM_TYPES.put(BACKSTAGE_PASSES_ITEM, new BackstagePassesBehavior(item));
 		ITEM_TYPES.put(CONJURED_ITEM, new ConjuredBehavior(item));
 	}
 	
 	/**
-	 * Basing on the type of item, it will get the appropriate behaviors.
+	 * Basing on the type of item to get the appropriate behaviors.
 	 * @param item {@link Item}
 	 * @return {@link ItemStateBehavior}
 	 */
