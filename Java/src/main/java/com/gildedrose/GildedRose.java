@@ -67,4 +67,8 @@ class GildedRose {
 		return item.quality < 50;
 	}
 	
+	private ItemBehaviorFactory getItemBehaviorFactory(Item item) {
+		return new ItemBehaviorFactory(item);
+	}
+	
 }
