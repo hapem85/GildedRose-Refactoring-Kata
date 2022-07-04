@@ -17,11 +17,16 @@ public class AgedBrieBehavior extends ItemStateBehavior {
 
 	@Override
 	int changedItemQuality() {
-		return this.item.quality + (this.item.quality < 50 ? 1 : 0);
+		return getUpdatedQuality();
 	}
 
 	@Override
 	int changedItemQualityIfSellInLessThanZero() {
-		return this.item.quality;
+		return getUpdatedQuality();
+	}
+
+	private int getUpdatedQuality() {
+		int quality = this.item.quality + 1;
+		return quality > 50 ? 50 : quality;
 	}
 }

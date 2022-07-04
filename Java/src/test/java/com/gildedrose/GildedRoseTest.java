@@ -71,7 +71,7 @@ public class GildedRoseTest {
 		
 		assertEquals(ItemBehaviorFactory.AGED_BRIE_ITEM, itemNameValue(app));
 		assertEquals(-1, itemSellByDayValue(app));
-		assertEquals(1, itemQualityValue(app));
+		assertEquals(2, itemQualityValue(app));
 	}
 
 
