@@ -7,6 +7,13 @@ public class BackstagePassesBehavior implements ItemStateBehavior {
 		this.item = item;
 	}
 	
+	/**
+	 * Backstage passes increases in Quality the older it gets
+	 * Quality increases by 2 when there are 10 days or less
+	 * by 3 when there are 5 days or less
+	 * Quality drops to 0 after the concert
+	 * The Quality of an item is never more than 50
+	 */
 	@Override
 	public void maintainState() {
 		this.item.quality += this.getNumberOfQualityToUpdate();
