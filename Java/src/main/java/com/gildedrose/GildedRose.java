@@ -13,7 +13,7 @@ class GildedRose {
     	for (Item item: items) {
     		ItemStateBehavior itemBehavior = this.getItemBehaviorFactory(item);
     		if(Objects.isNull(itemBehavior)) {
-    			return;
+    			continue;
     		}
     		itemBehavior.changeState();
     	}
