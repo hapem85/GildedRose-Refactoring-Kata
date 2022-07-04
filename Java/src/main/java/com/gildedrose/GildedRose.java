@@ -9,27 +9,26 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item: items) {
-            if (!item.name.equals("Aged Brie")
-                    && !item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            if (!item.name.equals("Aged Brie") && !item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (item.quality > 0) {
                     if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
                         item.quality = item.quality - 1;
                     }
                 }
             } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
+                if (this.isQualityLessThanFifty(item)) {
+                    this.increaseQualityByOne(item);
 
                     if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                         if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
+                            if (this.isQualityLessThanFifty(item)) {
+                                this.increaseQualityByOne(item);
                             }
                         }
 
                         if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
+                            if (this.isQualityLessThanFifty(item)) {
+                                this.increaseQualityByOne(item);
                             }
                         }
                     }
@@ -52,11 +51,20 @@ class GildedRose {
                         item.quality = item.quality - item.quality;
                     }
                 } else {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
+                    if (this.isQualityLessThanFifty(item)) {
+                        this.increaseQualityByOne(item);
                     }
                 }
             }
         }
     }
+    
+	private void increaseQualityByOne(Item item) {
+		item.quality += 1;
+	}
+
+	private boolean isQualityLessThanFifty(Item item) {
+		return item.quality < 50;
+	}
+	
 }
